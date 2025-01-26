@@ -12,31 +12,23 @@ local Spring =
     length = 0,
     damping = 0,
 
-    init = function(self, p1, p2, strength, length, damping)
-        self.points.p1 = p1
-        self.points.p2 = p2
-        self.strength = strength
-        self.length = length
-        self.damping = damping
-    end,
-
-
-    update = function(self)
-        -- todo: update vertex positions based on spring forces?
-        if dist2D(self.points.p1, self.points.p2) > self.length then
-            local force = subVec2D(self.points.p1, self.points.p2)
-            force = norm2D(force)
-            force = scaleVec2D(force, self.strength * (dist2D(self.points.p1, self.points.p2) - self.length))
-            force = subVec2D(force, scaleVec2D(self.points.p1, self.damping))
-            force = subVec2D(force, scaleVec2D(self.points.p2, self.damping))
-            self.points.p1 = addVec2D(self.points.p1, force)
-            self.points.p2 = subVec2D(self.points.p2, force)
-        end
+    init = function(Spring, p1, p2, strength, length, damping)
+        Spring.points.p1 = p1
+        Spring.points.p2 = p2
+        Spring.strength = strength
+        Spring.length = length
+        Spring.damping = damping
     end
+
 }
 function makeSpring(p1, p2, strength, length, damping)
     local s = Spring
     s:init(p1, p2, strength, length, damping)
     return s
+end
+
+function updateSpring(Spring)
+    local velocity = scaleVec2D(scaleVec2D(subVec2D(addVec2D(Spring.points.p1,(scaleVec2D((subVec2D(Spring.points.p2,Spring.points.p1)),0.5))),Spring.points.p1),(dist2D(Spring.points.p2,Spring.points.p1)-Spring.length)),Spring.strength)
+    Spring.points.p1 = addVec2D(Spring.points.p1,velocity)
 end
 

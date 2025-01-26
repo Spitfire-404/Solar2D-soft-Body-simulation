@@ -13,17 +13,16 @@ background:setFillColor(0.5, 0.5, 0.5)
 
 require("Springs")
 
-local testSpring = makeSpring({x = 0, y = 0}, {x = 0, y = 0}, 0, 0, 0)
+local testSpring = makeSpring({x = display.contentCenterX, y = display.contentCenterY}, {x = display.contentCenterX+20, y = display.contentCenterY+1}, 0.5,20,0.5)
 local circle = display.newCircle(0, 0, 5)
 local circle2 = display.newCircle(0, 0, 5)
 
 local function update()
+updateSpring(testSpring)
 circle.x = testSpring.points.p1.x
 circle.y = testSpring.points.p1.y
 circle2.x = testSpring.points.p2.x
 circle2.y = testSpring.points.p2.y
-
-testSpring.update()
 
 end
 Runtime:addEventListener("enterFrame", update)

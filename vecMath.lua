@@ -7,7 +7,7 @@ local Vec2D = {
 }
 
 function makeVec2D(x, y)
-    local v = Vec
+    local v = Vec2D
     v.x = x
     v.y = y
     return v
