@@ -1,5 +1,5 @@
 -- this is a heder file for physics of a soft body, specifically springs
-require("VecMath")
+require("vecMath")
 
 -- template spring table
 local Spring =
@@ -28,7 +28,8 @@ function makeSpring(p1, p2, strength, length, damping)
 end
 
 function updateSpring(Spring)
-    local velocity = scaleVec2D(scaleVec2D(subVec2D(addVec2D(Spring.points.p1,(scaleVec2D((subVec2D(Spring.points.p2,Spring.points.p1)),0.5))),Spring.points.p1),(dist2D(Spring.points.p2,Spring.points.p1)-Spring.length)),Spring.strength)
-    Spring.points.p1 = addVec2D(Spring.points.p1,velocity)
+    Spring.points.p1.y = Spring.points.p1.y + 9.8
+    local force1 = scaleVec2D(normVec2D(subVec2D(Spring.points.p2, Spring.points.p1)),(dist2D(Spring.points.p2, Spring.points.p1)-Spring.length) * Spring.damping)
+    Spring.points.p1 = addVec2D(Spring.points.p1,force1) 
 end
 

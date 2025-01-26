@@ -7,7 +7,10 @@ local Vec2D = {
 }
 
 function makeVec2D(x, y)
-    local v = Vec2D
+    local v = {
+        x = 0,
+        y = 0
+    }
     v.x = x
     v.y = y
     return v
@@ -30,7 +33,10 @@ function divVec2D(v1, v2)
 end
 
 function scaleVec2D(v, s)
-    return makeVec2D(v.x * s, v.y * s)
+    v.x = v.x*s
+    v.y = v.y*s
+
+    return v
 end
 
 function dot2D(v1, v2)
@@ -45,7 +51,7 @@ function mag2D(v)
     return math.sqrt(v.x * v.x + v.y * v.y)
 end
 
-function norm2D(v)
+function normVec2D(v)
     local m = mag2D(v)
     return makeVec2D(v.x / m, v.y / m)
 end
