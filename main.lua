@@ -13,29 +13,25 @@ background:setFillColor(0.5, 0.5, 0.5)
 
 require("Springs")
 
-local testSpring = makeSpring({x = display.contentCenterX, y = display.contentCenterY}, {x = display.contentCenterX+20, y = display.contentCenterY+1}, 200,0.1,0)
+local testSpring = makeSpring({x = display.contentCenterX, y = display.contentCenterY-20}, {x = display.contentCenterX+1, y = display.contentCenterY+1}, 200,0.1,0)
 local circle = display.newCircle(0, 0, 5)
 local circle2 = display.newCircle(0, 0, 5)
 
-local oldLine = display.newLine(testSpring.points.p1.x, testSpring.points.p1.y, testSpring.points.p2.x, testSpring.points.p2.y)
+local oldPoint = { x = testSpring.points.p1.x, y = testSpring.points.p1.y }
 local function update()
-    oldLine:removeSelf()
     updateSpring(testSpring)
     circle.x = testSpring.points.p1.x
     circle.y = testSpring.points.p1.y
     circle2.x = testSpring.points.p2.x
     circle2.y = testSpring.points.p2.y
-    
-    local line = display.newLine(testSpring.points.p1.x, testSpring.points.p1.y, testSpring.points.p2.x, testSpring.points.p2.y)
-    line.strokeWidth = (dist2D(testSpring.points.p1, testSpring.points.p2)/testSpring.length*2)+4
-    line.x1 = circle.x
-    line.y1 = circle.y
-    line.x2 = circle2.x
-    line.y2 = circle2.y
 
-    oldLine = line
+    l = display.newLine(oldPoint.x,oldPoint.y,testSpring.points.p1.x,testSpring.points.p1.y)
+    l:setStrokeColor(0.8,0,0)
+    l.strokeWidth = mag2D(testSpring.velocities.p1)/14
 
-    line:setStrokeColor(((dist2D(testSpring.points.p1, testSpring.points.p2)/testSpring.length)), 1, 0, 1)
+    oldPoint.x = testSpring.points.p1.x
+    oldPoint.y = testSpring.points.p1.y
+
 end
 Runtime:addEventListener("enterFrame", update)
 
