@@ -13,7 +13,7 @@ background:setFillColor(0.5, 0.5, 0.5)
 
 require("Springs")
 
-local testSpring = makeSpring({x = display.contentCenterX, y = display.contentCenterY}, {x = display.contentCenterX+20, y = display.contentCenterY+1}, 10,400,1.4)
+local testSpring = makeSpring({x = display.contentCenterX, y = display.contentCenterY}, {x = display.contentCenterX+20, y = display.contentCenterY+1}, 500,0.1,0)
 local circle = display.newCircle(0, 0, 5)
 local circle2 = display.newCircle(0, 0, 5)
 
