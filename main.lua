@@ -17,6 +17,9 @@ local testSpring = makeSpring({x = display.contentCenterX, y = display.contentCe
 local circle = display.newCircle(0, 0, 5)
 local circle2 = display.newCircle(0, 0, 5)
 
+local deleteIndex = 0
+local deleteTable = {}
+
 local oldPoint = { x = testSpring.points.p1.x, y = testSpring.points.p1.y }
 local function update()
     updateSpring(testSpring)
@@ -32,6 +35,15 @@ local function update()
     oldPoint.x = testSpring.points.p1.x
     oldPoint.y = testSpring.points.p1.y
 
+    deleteTable[deleteIndex] = l
+    deleteIndex = deleteIndex + 1
+
+    if deleteIndex > 1000 then
+    for i = 0, deleteIndex do
+        display.remove( deleteTable[i])
+    end
+    deleteIndex = 0
+    end
 end
 Runtime:addEventListener("enterFrame", update)
 
