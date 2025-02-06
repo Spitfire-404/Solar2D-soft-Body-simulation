@@ -24,14 +24,15 @@ function makeSpring(p1, p2, length, strength, damping)
             p1 = 1,
             p2 = 1
         },
-    
+        line = display.newLine(0,0,0,0),
+        
         length = 0,
         strength = 0,
         damping = 0,
         gravity = 2,
 
         update1 = true,
-        update2 = true
+        update2 = false
     
     }
     s.points.p1 = p1
@@ -39,6 +40,7 @@ function makeSpring(p1, p2, length, strength, damping)
     s.strength = strength
     s.length = length
     s.damping = damping
+    s.line = display.newLine(p1.x, p1.y, p2.x, p2.y)
     return s
 end
 
@@ -59,5 +61,9 @@ function updateSpring(Spring)
     
     if Spring.update1 then Spring.points.p1 = addVec2D(Spring.points.p1, Spring.velocities.p1) end
     if Spring.update2 then Spring.points.p2 = addVec2D(Spring.points.p2, Spring.velocities.p2) end
+
+    Spring.line:removeSelf()
+
+    Spring.line = display.newLine(Spring.points.p1.x, Spring.points.p1.y, Spring.points.p2.x, Spring.points.p2.y)
 end
 
