@@ -29,7 +29,6 @@ function makeSpring(p1, p2, length, strength, damping)
         length = 0,
         strength = 0,
         damping = 0,
-        gravity = 2,
 
         update1 = true,
         update2 = false
@@ -46,24 +45,21 @@ end
 
 function updateSpring(Spring)
     
-    local grav = scaleVec2D(makeVec2D(0,1),Spring.gravity)
     local force1 = scaleVec2D(normVec2D(subVec2D(Spring.points.p1, Spring.points.p2)), -Spring.strength*(dist2D(Spring.points.p1, Spring.points.p2)-Spring.length))
     Spring.velocities.p1 = addVec2D(Spring.velocities.p1,force1) 
     Spring.velocities.p1 = scaleVec2D(Spring.velocities.p1, Spring.damping)
-    --Spring.velocities.p1 = addVec2D(Spring.velocities.p1, grav)
-
     
     local force2 = scaleVec2D(normVec2D(subVec2D(Spring.points.p2, Spring.points.p1)), -Spring.strength*(dist2D(Spring.points.p2, Spring.points.p1)-Spring.length))
     Spring.velocities.p2 = addVec2D(Spring.velocities.p2, force2)
     Spring.velocities.p2 = scaleVec2D(Spring.velocities.p2, Spring.damping)
-    --Spring.velocities.p2 = addVec2D(Spring.velocities.p2, grav)
 
     
     if Spring.update1 then Spring.points.p1 = addVec2D(Spring.points.p1, Spring.velocities.p1) end
     if Spring.update2 then Spring.points.p2 = addVec2D(Spring.points.p2, Spring.velocities.p2) end
 
     Spring.line:removeSelf()
-
     Spring.line = display.newLine(Spring.points.p1.x, Spring.points.p1.y, Spring.points.p2.x, Spring.points.p2.y)
+    Spring.line.strokeWidth = 5
+    Spring.line:setStrokeColor(0.8,0.8,0.8)
 end
 
