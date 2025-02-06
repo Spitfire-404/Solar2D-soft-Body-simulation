@@ -12,7 +12,7 @@ background:setFillColor(0.5, 0.5, 0.5)
 
 require("Springs")
 
-local testSpring = makeSpring({x = display.contentCenterX, y = display.contentCenterY-20}, {x = display.contentCenterX+1, y = display.contentCenterY+1}, 100,0.2,1.1)
+local testSpring = makeSpring({x = display.contentCenterX, y = display.contentCenterY-20}, {x = display.contentCenterX+1, y = display.contentCenterY+1}, 100,0.2,0.9)
 local circle = display.newCircle(0, 0, 5)
 local circle2 = display.newCircle(0, 0, 5)
 
@@ -28,9 +28,10 @@ local function update()
             display.remove( deleteTable[i])
         end
         deleteIndex = 0
-        end
-
+    end
     updateSpring(testSpring)
+
+
     circle.x = testSpring.points.p1.x
     circle.y = testSpring.points.p1.y
     circle2.x = testSpring.points.p2.x
