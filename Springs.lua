@@ -9,41 +9,36 @@ require("vecMath")
 -- x = displacement from origional length
 
 
--- template spring table
-local Spring =
-{
-    points = {
-        p1 = {x = 0, y = 0},
-        p2 = {x = 0, y = 0}
-    },
-    velocities = {
-        p1 = {x = 0, y = 0},
-        p2 = {x = 0, y = 0}
-    },
-    mass = {
-        p1 = 1,
-        p2 = 1
-    },
-
-    length = 0,
-    strength = 0,
-    damping = 0,
-    gravity = 2;
-    resistance = 0.99;
-
-
-    init = function(Spring, p1, p2, strength, length, damping)
-        Spring.points.p1 = p1
-        Spring.points.p2 = p2
-        Spring.strength = strength
-        Spring.length = length
-        Spring.damping = damping
-    end
-
-}
 function makeSpring(p1, p2, length, strength, damping)
-    local s = Spring
-    s:init(p1, p2, strength, length, damping)
+    local s =
+    {
+        points = {
+            p1 = {x = 0, y = 0},
+            p2 = {x = 0, y = 0}
+        },
+        velocities = {
+            p1 = {x = 0, y = 0},
+            p2 = {x = 0, y = 0}
+        },
+        mass = {
+            p1 = 1,
+            p2 = 1
+        },
+    
+        length = 0,
+        strength = 0,
+        damping = 0,
+        gravity = 2,
+
+        update1 = true,
+        update2 = true
+    
+    }
+    s.points.p1 = p1
+    s.points.p2 = p2
+    s.strength = strength
+    s.length = length
+    s.damping = damping
     return s
 end
 
@@ -62,7 +57,7 @@ function updateSpring(Spring)
     --Spring.velocities.p2 = addVec2D(Spring.velocities.p2, grav)
 
     
-    Spring.points.p2 = addVec2D(Spring.points.p2, Spring.velocities.p2)
-    Spring.points.p1 = addVec2D(Spring.points.p1, Spring.velocities.p1)
+    if Spring.update1 then Spring.points.p1 = addVec2D(Spring.points.p1, Spring.velocities.p1) end
+    if Spring.update2 then Spring.points.p2 = addVec2D(Spring.points.p2, Spring.velocities.p2) end
 end
 
