@@ -20,6 +20,10 @@ local Spring =
         p1 = {x = 0, y = 0},
         p2 = {x = 0, y = 0}
     },
+    mass = {
+        p1 = 3,
+        p2 = 1
+    },
 
     length = 0,
     strength = 0,
@@ -44,12 +48,13 @@ end
 
 function updateSpring(Spring)
     
-    local grav = scaleVec2D(makeVec2D(0,1),Spring.gravity)
+    local grav = scaleVec2D(makeVec2D(0,1),Spring.gravity*Spring.mass.p1)
     local force1 = scaleVec2D(normVec2D(subVec2D(Spring.points.p1, Spring.points.p2)), -Spring.strength*(dist2D(Spring.points.p1, Spring.points.p2)-Spring.length))
-    Spring.velocities.p1 = addVec2D(Spring.velocities.p1, grav)
+    --Spring.velocities.p1 = addVec2D(Spring.velocities.p1, grav)
     Spring.velocities.p1 = addVec2D(Spring.velocities.p1,force1) 
+    --local damping1 = scaleVec2D(Spring.velocities.p1, Spring.damping)
+    Spring.velocities.p1 = scaleVec2D(Spring.velocities.p1, 1/Spring.damping)
     Spring.points.p1 = addVec2D(Spring.points.p1, Spring.velocities.p1)
-    
 
 end
 
