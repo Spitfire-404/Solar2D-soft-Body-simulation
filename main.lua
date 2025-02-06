@@ -23,6 +23,13 @@ helpText:setFillColor(0, 0, 0)
 
 local oldPoint = { x = testSpring.points.p1.x, y = testSpring.points.p1.y }
 local function update()
+    if deleteIndex > 0  then
+        for i = 0, deleteIndex do
+            display.remove( deleteTable[i])
+        end
+        deleteIndex = 0
+        end
+
     updateSpring(testSpring)
     circle.x = testSpring.points.p1.x
     circle.y = testSpring.points.p1.y
@@ -40,12 +47,7 @@ local function update()
     deleteTable[deleteIndex] = l
     deleteIndex = deleteIndex + 1
 
-    if deleteIndex > 1  then
-    for i = 0, deleteIndex do
-        display.remove( deleteTable[i])
-    end
-    deleteIndex = 0
-    end
+    
 end
 function onTap( event )
     helpText.text = ""
