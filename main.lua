@@ -12,9 +12,9 @@ background:setFillColor(0.5, 0.5, 0.5)
 
 require("Springs")
 
-local testSpring  = makeSpring({x = display.contentCenterX, y = display.contentCenterY-20}, {x = display.contentCenterX+1,  y = display.contentCenterY+1}, 100,0.6,0.5)
-local testSpring2 = makeSpring({x = display.contentCenterX, y = display.contentCenterY-20}, {x = display.contentCenterX+10, y = display.contentCenterY+1}, 120,0.6,0.5)
-local testSpring3 = makeSpring({x = display.contentCenterX, y = display.contentCenterY-20}, {x = display.contentCenterX+30, y = display.contentCenterY+1}, 100,0.6,0.5)
+local testSpring  = makeSpring({x = display.contentCenterX, y = display.contentCenterY-20}, {x = display.contentCenterX+1,  y = display.contentCenterY+1}, 100,0.95,0.75)
+local testSpring2 = makeSpring({x = display.contentCenterX, y = display.contentCenterY-20}, {x = display.contentCenterX+10, y = display.contentCenterY+1}, 120,0.95,0.75)
+local testSpring3 = makeSpring({x = display.contentCenterX, y = display.contentCenterY-20}, {x = display.contentCenterX+30, y = display.contentCenterY+1}, 100,0.95,0.75)
 
 local circle = display.newCircle(0, 0, 5)
 local circle2 = display.newCircle(0, 0, 10)
@@ -51,21 +51,23 @@ local function update()
 
     end
 
+
+    
+    --testSpring3.points.p2 = scaleVec2D(addVec2D(testSpring3.points.p2, testSpring2.points.p1), 0.5)
+    --testSpring2.points.p2 = scaleVec2D(addVec2D(testSpring2.points.p2, testSpring.points.p1), 0.5)
+    --testSpring.points.p2 = scaleVec2D(addVec2D(testSpring.points.p2, testSpring3.points.p1), 0.5)
+    
     updateSpring(testSpring)
     updateSpring(testSpring2)
     updateSpring(testSpring3)
 
-    testSpring2.points.p2 = testSpring.points.p1
-    testSpring3.points.p2 = testSpring2.points.p1
-    testSpring.points.p2 = testSpring3.points.p1
+    testSpring3.points.p2 = scaleVec2D(addVec2D(testSpring3.points.p2, testSpring2.points.p1), 0.5)
+    testSpring2.points.p2 = scaleVec2D(addVec2D(testSpring2.points.p2, testSpring.points.p1), 0.5)
+    testSpring.points.p2 = scaleVec2D(addVec2D(testSpring.points.p2, testSpring3.points.p1), 0.5)
     
-    --testSpring2.points.p2 = scaleVec2D(addVec2D(testSpring2.points.p2, testSpring.points.p1), 0.5)
-    --testSpring3.points.p2 = scaleVec2D(addVec2D(testSpring3.points.p2, testSpring2.points.p1), 0.5)
-    --testSpring.points.p2 = scaleVec2D(addVec2D(testSpring.points.p2, testSpring3.points.p1), 0.5)
-    
-
-
-
+    --testSpring3.points.p2 = testSpring2.points.p1
+    --testSpring2.points.p2 = testSpring.points.p1
+    --testSpring.points.p2 = testSpring3.points.p1
 
     if fill then
         local div = 300
@@ -110,6 +112,22 @@ local function update()
 
     oldPoint3.x = testSpring3.points.p1.x
     oldPoint3.y = testSpring3.points.p1.y
+
+
+    testSpring2.line:removeSelf()
+    testSpring2.line = display.newLine(testSpring2.points.p2.x, testSpring2.points.p2.y, testSpring.points.p2.x, testSpring.points.p2.y)
+    testSpring2.line.strokeWidth = 5
+    testSpring2.line:setStrokeColor(0.8,0.8,0.8)
+
+    testSpring3.line:removeSelf()
+    testSpring3.line = display.newLine(testSpring3.points.p2.x, testSpring3.points.p2.y, testSpring2.points.p2.x, testSpring2.points.p2.y)
+    testSpring3.line.strokeWidth = 5
+    testSpring3.line:setStrokeColor(0.8,0.8,0.8)
+
+    testSpring.line:removeSelf()
+    testSpring.line = display.newLine(testSpring.points.p2.x, testSpring.points.p2.y, testSpring3.points.p2.x, testSpring3.points.p2.y)
+    testSpring.line.strokeWidth = 5
+    testSpring.line:setStrokeColor(0.8,0.8,0.8)
 
 
     

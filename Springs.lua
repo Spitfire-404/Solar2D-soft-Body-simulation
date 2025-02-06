@@ -9,7 +9,7 @@ require("vecMath")
 -- x = displacement from origional length
 
 
-function makeSpring(p1, p2, length, strength, damping)
+function makeSpring(p1, p2, length, strength, damping, airResistance)
     local s =
     {
         points = {
@@ -31,7 +31,7 @@ function makeSpring(p1, p2, length, strength, damping)
         damping = 0,
 
         update1 = true,
-        update2 = false
+        update2 = true
     
     }
     s.points.p1 = p1
@@ -45,11 +45,11 @@ end
 
 function updateSpring(Spring)
     
-    local force1 = scaleVec2D(normVec2D(subVec2D(Spring.points.p1, Spring.points.p2)), -Spring.strength*(dist2D(Spring.points.p1, Spring.points.p2)-Spring.length))
+    local force1 = scaleVec2D(scaleVec2D(normVec2D(subVec2D(Spring.points.p1, Spring.points.p2)),1), -Spring.strength*(dist2D(Spring.points.p1, Spring.points.p2)-Spring.length))
     Spring.velocities.p1 = addVec2D(Spring.velocities.p1,force1) 
     Spring.velocities.p1 = scaleVec2D(Spring.velocities.p1, Spring.damping)
     
-    local force2 = scaleVec2D(normVec2D(subVec2D(Spring.points.p2, Spring.points.p1)), -Spring.strength*(dist2D(Spring.points.p2, Spring.points.p1)-Spring.length))
+    local force2 = scaleVec2D(scaleVec2D(normVec2D(subVec2D(Spring.points.p2, Spring.points.p1)),1), -Spring.strength*(dist2D(Spring.points.p2, Spring.points.p1)-Spring.length))
     Spring.velocities.p2 = addVec2D(Spring.velocities.p2, force2)
     Spring.velocities.p2 = scaleVec2D(Spring.velocities.p2, Spring.damping)
 
