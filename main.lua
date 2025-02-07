@@ -13,15 +13,9 @@ background:setFillColor(0.5, 0.5, 0.5)
 require("Springs")
 
 local testSpring  = makeSpring({x = display.contentCenterX, y = display.contentCenterY-20}, {x = display.contentCenterX+1,  y = display.contentCenterY+1}, 100,0.95,0.75)
-local testSpring2 = makeSpring({x = display.contentCenterX, y = display.contentCenterY-20}, {x = display.contentCenterX+10, y = display.contentCenterY+1}, 120,0.95,0.75)
+local testSpring2 = makeSpring({x = display.contentCenterX, y = display.contentCenterY-20}, {x = display.contentCenterX+10, y = display.contentCenterY+1}, 141,0.95,0.75)
 local testSpring3 = makeSpring({x = display.contentCenterX, y = display.contentCenterY-20}, {x = display.contentCenterX+30, y = display.contentCenterY+1}, 100,0.95,0.75)
 
-local circle = display.newCircle(0, 0, 5)
-local circle2 = display.newCircle(0, 0, 10)
-local circle3 = display.newCircle(0, 0, 5)
-local circle4 = display.newCircle(0, 0, 5)
-local circle5 = display.newCircle(0, 0, 5)
-local circle6 = display.newCircle(0, 0, 5)
 
 local deleteIndex = 0
 local deleteTable = {}
@@ -37,7 +31,7 @@ local oldPoint3 = { x = testSpring3.points.p1.x, y = testSpring3.points.p1.y }
 local screenPressed = false
 touch = {x = 0, y = 0}
 local function update()
-    if deleteIndex > 2 and false then
+    if deleteIndex > 2 then
         for i = 0, deleteIndex do
             display.remove( deleteTable[i])
         end
