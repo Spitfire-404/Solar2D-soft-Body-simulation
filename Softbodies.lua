@@ -19,12 +19,12 @@ function makeSoftbody(points, center, mass)
     end
     softbody.springs[#points] = makeSpring(points[#points], points[1], dist2D(points[#points], points[1]), 0.8, 0.5)
 
-    --for e = 1, #softbody.springs do
-    --    softbody.springs[#softbody.springs+e-1] = makeSpring(softbody.center, softbody.springs[(e)].points.p2, 100, 0.8, 0.5)
-    --    
-    --    --softbody.lengths[i] = dist2D(softbody.springs[i].points.p1, softbody.springs[i].points.p2)
-    --end
-
+    for e = 1, #softbody.springs do
+        softbody.springs[#softbody.springs+e] = makeSpring(softbody.center, softbody.springs[(e)].points.p2, 100, 0.8, 0.5)
+        
+        --softbody.lengths[i] = dist2D(softbody.springs[i].points.p1, softbody.springs[i].points.p2)
+    end
+    
     return softbody
     
 end

@@ -40,6 +40,8 @@ local function update()
     
     if screenPressed then
         test.center = touch
+
+        test.springs[1].points.p2 = touch
     end
 
     updateSoftbody(test)
