@@ -1,5 +1,5 @@
 -- softbodie file
-require("springs")
+require("Springs")
 
 function makeSoftbody(points, center, mass)
     local softbody = {

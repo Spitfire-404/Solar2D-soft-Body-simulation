@@ -10,7 +10,7 @@ display.setStatusBar(display.HiddenStatusBar)
 local background = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
 background:setFillColor(0.5, 0.5, 0.5)
 
-require("softbodies")
+require("Softbodies")
 
 local test = makeSoftbody({
     {x=100, y=100},
