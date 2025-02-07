@@ -9,7 +9,7 @@ require("vecMath")
 -- x = displacement from origional length
 
 
-function makeSpring(p1, p2, length, strength, damping, airResistance)
+function makeSpring(p1, p2, length, strength, damping)
     local s =
     {
         points = {
